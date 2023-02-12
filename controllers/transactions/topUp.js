@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
   }).then(function(body){
     res.json({trial: body});
   });
+}
 //   function payWithPaystack() {
 //   var handler = PaystackPop.setup({
 //     key: process.env.PUBLIC_KEY, // Replace with your public key
