@@ -6,3 +6,7 @@
 */
 -- AlterTable
 ALTER TABLE "User" ADD COLUMN     "passcode" INTEGER NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Wallet" ALTER COLUMN "id" DROP DEFAULT;
+DROP SEQUENCE "Wallet_id_seq";

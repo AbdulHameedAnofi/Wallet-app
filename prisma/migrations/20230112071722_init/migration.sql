@@ -4,7 +4,6 @@ CREATE TABLE "User" (
     "name" VARCHAR(255) NOT NULL,
     "email" TEXT NOT NULL,
     "phone" INTEGER NOT NULL,
-    "user_type" VARCHAR(255) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")

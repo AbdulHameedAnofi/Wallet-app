@@ -3,25 +3,7 @@ const { route } = require('.');
 var router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const session = require('express-session');
-var bodyParser = require('body-parser');
 const Paystack = require('paystack')(process.env.SECRET_KEY)
-
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended: true}));
-router.use(session({
-  genid: (req) => {
-    Math.floor(Math.random() * (1000 - 10) + 1000)
-  },
-  secret: "1q2w3e4r5t6y7u8i9o0p",
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    maxAge: 3600000
-  },
-  name: "sessionId",
-  saveUninitialized: false,
-  resave: false
-}))
 
 const db = new PrismaClient;
 
@@ -92,11 +74,11 @@ router.post('/payment', (req, res) => {
   /*
     Payment function
   */
-  const pay = async (amount, pay_to_walletId, description) => {
+  const pay = async (amount, walletId, description) => {
 
     var wallet_to = await db.wallet.findFirst({
       where: {
-        id: pay_to_walletId
+        id: walletId
       }
     });
 
@@ -161,7 +143,7 @@ router.post('/payment', (req, res) => {
       debited_wallet_id: session.wallet.id,
     })
   };
-  pay(body.amount, body.pay_to_walletId, body.description)
+  pay(body.amount, body.walletId, body.description)
 })
 
 /*
